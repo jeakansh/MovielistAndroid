@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
+
+
+<EditText
+        android:id="@+id/name"
+        android:layout_marginTop="15dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search movie name or actor or actress"
+        android:inputType="text" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/searchByActor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search by Actor"
+        android:onClick="sendMessage" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/searchByActress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search by Actress"
+        android:onClick="sendMessage" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/display_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display All"
+        android:onClick="sendMessage" />
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
