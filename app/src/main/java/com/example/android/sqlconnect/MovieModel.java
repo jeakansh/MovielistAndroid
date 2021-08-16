@@ -61,12 +61,10 @@ public class MovieModel {
 
     @Override
     public String toString() {
-        return "MovieModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", yearOfRelease=" + yearOfRelease +
-                ", actor='" + actor + '\'' +
-                ", actress='" + actress + '\'' +
-                '}';
+        return  id +
+                "\nname: " + name +
+                "\nYear Of Release: " + yearOfRelease +
+                "\nActor: " + actor +
+                "\nActress: " + actress;
     }
 }

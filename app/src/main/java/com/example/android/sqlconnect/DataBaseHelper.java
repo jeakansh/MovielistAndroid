@@ -78,10 +78,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
 
     }
-    public Cursor searchData(String name){
+    public Cursor searchData(String name,String columnToSearch){
         SQLiteDatabase db = this.getReadableDatabase();
 //        string queryString = "SELECT * FROM " + MOVIE_TABLE + " WHERE " + NAME + " = " + name;
-        String queryString = "SELECT * FROM " + MOVIE_TABLE;
+        String queryString = "SELECT * FROM " + MOVIE_TABLE + " WHERE " + columnToSearch + " LIKE '" +"%"+name+"%"+"'";
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor;
     }

@@ -14,4 +14,14 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void tes(){
+        String MOVIE_TABLE="MOVIE_TABLE";
+         String ACTOR = "ACTOR";
+         String name = "pankaj";
+        String queryString = "SELECT * FROM " + MOVIE_TABLE + " WHERE " + ACTOR + " = '" + name +"'";
+        System.out.println(queryString);
+    }
+
 }

@@ -34,23 +34,25 @@ public class MainActivity extends AppCompatActivity {
         movieList = findViewById(R.id.list_view);
 
 
-        MovieModel movieModel = new MovieModel(0, "INTERSTELLAR", 2014, "Matthew McConaughey", "Anne Hathaway" );
-        MovieModel movieMode2 = new MovieModel(0, "INCEPTION", 2010, "Leonardo DiCaprio", " " );
-        MovieModel movieMode3 = new MovieModel(0, "PARASITE", 2019, "Seo-joon", " Yeo-jeong" );
-        MovieModel movieMode4 = new MovieModel(0, "YOUR NAME", 2016, "", " " );
-        MovieModel movieMode5 = new MovieModel(0, "ARRIVAL", 2016, "Amy Adams", "Jeremy Renner" );
-        MovieModel movieModel6 = new MovieModel(0, "MIMI", 2021, "Pankaj Tripathi" , "Kriti Sanon");
-        MovieModel movieModel7 = new MovieModel(0, "JHONNY ENGLISH", 2003, "Rowan Atkinson" , "");
+        if(getPreferences(MODE_PRIVATE).getBoolean("is_first_run",true)){
+            MovieModel movieModel = new MovieModel(0, "INTERSTELLAR", 2014, "Matthew McConaughey", "Anne Hathaway" );
+            MovieModel movieMode2 = new MovieModel(0, "INCEPTION", 2010, "Leonardo DiCaprio", " " );
+            MovieModel movieMode3 = new MovieModel(0, "PARASITE", 2019, "Seo-joon", " Yeo-jeong" );
+            MovieModel movieMode4 = new MovieModel(0, "YOUR NAME", 2016, "", " " );
+            MovieModel movieMode5 = new MovieModel(0, "ARRIVAL", 2016, "Amy Adams", "Jeremy Renner" );
+            MovieModel movieModel6 = new MovieModel(0, "MIMI", 2021, "Pankaj Tripathi" , "Kriti Sanon");
+            MovieModel movieModel7 = new MovieModel(0, "JHONNY ENGLISH", 2003, "Rowan Atkinson" , "");
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
-        dataBaseHelper.addData(movieModel);
-        dataBaseHelper.addData(movieMode2);
-        dataBaseHelper.addData(movieMode3);
-        dataBaseHelper.addData(movieMode4);
-        dataBaseHelper.addData(movieMode5);
-        dataBaseHelper.addData(movieModel6);
-        dataBaseHelper.addData(movieModel7);
-
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
+            dataBaseHelper.addData(movieModel);
+            dataBaseHelper.addData(movieMode2);
+            dataBaseHelper.addData(movieMode3);
+            dataBaseHelper.addData(movieMode4);
+            dataBaseHelper.addData(movieMode5);
+            dataBaseHelper.addData(movieModel6);
+            dataBaseHelper.addData(movieModel7);
+            getPreferences(MODE_PRIVATE).edit().putBoolean("is_first_run",false).commit();
+        }
 
         bt_display.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,9 +69,10 @@ public class MainActivity extends AppCompatActivity {
         searchByActor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView name = (TextView) findViewById(R.id.name);
+//                TextView name = (EditText) findViewById(R.id.name);
+
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
-                Cursor search = dataBaseHelper.searchData(name.toString());
+                Cursor search = dataBaseHelper.searchData(name.getText().toString(),"ACTOR");
                 if(search.getCount() == 0){
                     Toast.makeText(MainActivity.this, "Data Not Found", Toast.LENGTH_SHORT).show();
                     return;
@@ -78,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 while(search.moveToNext())
                 {
                     buffer.append("Actor: "+ search.getString(3) + "\n");
-                    buffer.append("Name :" +search.getString(1) + "\n");
-//                    buffer.append("Year :" +search.getInt(2)+ "\n");
+                    buffer.append("Name: " +search.getString(1) + "\n");
+                    buffer.append("Year: " +search.getInt(2)+ "\n");
 
 //                    buffer.append("Actress: "+ search.getString(4) + "\n");
                     buffer.append("\n");
@@ -95,9 +98,8 @@ public class MainActivity extends AppCompatActivity {
         searchByActress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView name = (TextView) findViewById(R.id.name);
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
-                Cursor search = dataBaseHelper.searchData(name.toString());
+                Cursor search = dataBaseHelper.searchData(name.getText().toString(),"ACTRESS");
                 if(search.getCount() == 0){
                     Toast.makeText(MainActivity.this, "Data Not Found", Toast.LENGTH_SHORT).show();
                     return;
@@ -106,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 while(search.moveToNext())
                 {
                     buffer.append("Actress: "+ search.getString(4) + "\n");
-                    buffer.append("Name :" +search.getString(1) + "\n");
-//                    buffer.append("Year :" +search.getInt(2)+ "\n");
+                    buffer.append("Name: " +search.getString(1) + "\n");
+                    buffer.append("Year: " +search.getInt(2)+ "\n");
 
 //                    buffer.append("Actress: "+ search.getString(4) + "\n");
                     buffer.append("\n");
